@@ -60,12 +60,7 @@ try {
     # Define Spicetify executable
     $spicetifyExe = Join-Path $env:USERPROFILE "AppData\Local\spicetify\spicetify.exe"
 
-    # Run 'auto' and capture output
-    Log "Running: spicetify.exe auto"
-    $autoOutput = & "$spicetifyExe" auto 2>&1
-    $autoOutput | ForEach-Object { Log "auto: $_" }
-
-    # Always run 'update' regardless of 'auto' output
+    # Rrun 'update'
     Log "Running: spicetify.exe update"
     $updateOutput = & "$spicetifyExe" update 2>&1
     $updateExitCode = $LASTEXITCODE
@@ -78,6 +73,12 @@ try {
     }
 
     Log "Spicetify successfully updated."
+
+    # Run 'auto' and capture output
+    Log "Running: spicetify.exe auto"
+    $autoOutput = & "$spicetifyExe" auto 2>&1
+    $autoOutput | ForEach-Object { Log "auto: $_" }
+
     Log "----- Script finished successfully -----`n"
 }
 catch {
